@@ -1,0 +1,13 @@
+version: '3'
+services:
+  java:
+    build:  ./java
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./java/server:/code
+  db:
+    image: mariadb:10.3
+    container_name: db
+    volumes:
+      - "./db-data:/var/lib/mysql"
