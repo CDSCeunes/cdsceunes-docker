@@ -6,6 +6,16 @@ services:
       - "3000:3000"
     volumes:
       - ./java/server:/code
+    depends_on:
+      - db 
+    command: >
+        sh -c "
+        until nc -z -v -w30 db 3306
+        do
+          echo "Waiting for database connection..."
+          # wait for 5 seconds before check again
+          sleep 5
+        done"
   db:
     image: mariadb:10.3
     container_name: db

@@ -15,4 +15,6 @@ RUN ["mvn", "verify"]
 ADD src/main /code/src/main
 RUN ["mvn", "package"]
 
+RUN ["/bin/bash", "-c", "'sleep 5; nc -lk db:'"]
+
 CMD ["java", "-jar", "target/app.jar"]
